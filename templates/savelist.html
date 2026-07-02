@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% load static %}
+{% block main %}
+<style>
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .recommender {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .recommender h2 {
+            color: #00796b;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .form-group input,
+        .form-group select {
+            width: 90%;
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button[type="submit"] {
+            background-color: #00796b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button[type="submit"]:hover {
+            background-color: #004d40;
+        }
+        #results {
+            margin-top: 30px;
+        }
+        #results h2 {
+            color: #00796b;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .hidden {
+            display: none;
+        }
+        a {
+            text-decoration: none;
+            color:white;
+        }
+        #btn {
+            position:absolute;
+            right:80px; 
+            top:50px;
+            font-size: larger;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background_0.3s;
+            font-weight: bolder;
+        }
+        #Home-btn {
+            position:absolute;
+            left:80px; 
+            top:50px;
+            font-size: larger;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background_0.3s;
+            font-weight: bolder;
+        }
+    </style>
+<main>
+    {% if destinations %}
+        <section class="recommender">
+            <h2>Recommendations saved</h2>
+            {% for destination in destinations %}
+            <div>
+                <div >
+                   <p><strong>Destination Name:{{destination.destination.Name}}</strong></p>
+                </div>
+
+                <div >
+                    <p><strong>Budget :{{destination.destination.budget}}</strong></p>
+                </div>
+
+                <div >
+                    <p><strong>Duration (days):{{destination.destination.Duration}}</strong></p>
+                </div>
+
+                <div >
+                    <p><strong>Preferred Season:{{destination.destination.Season}}</strong></p>
+                </div>
+                <div >
+                    <p><strong>Activates:{{destination.destination.activate}}</strong></p>
+                </div>
+                <a href="{% url 'delete_Save' pk=destination.id %}"><button type='submit'>Delete</button></a>
+            </div>
+            {% endfor %}
+        </section>
+        {% else %}
+        <section class="recommender">
+            <div >
+                <p><strong>No Record</strong></p>
+            </div>
+        </section>
+        {% endif %}
+    </main>
+{% endblock  %}
